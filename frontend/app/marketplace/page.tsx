@@ -17,10 +17,10 @@ export default function MarketplacePage() {
   // Fetch listings and properties, and refresh on event
   useEffect(() => {
     const fetchAll = () => {
-      fetch('http://localhost:4000/api/marketplace/listings')
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/marketplace/listings`)
         .then(res => res.json())
         .then(setListings);
-      fetch('http://localhost:4000/api/properties')
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/properties`)
         .then(res => res.json())
         .then(setProperties);
     };
@@ -42,7 +42,7 @@ export default function MarketplacePage() {
       return;
     }
     setBuyingId(listingId);
-    const res = await fetch('http://localhost:4000/api/marketplace/buy', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/marketplace/buy`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ listingId, buyer }),

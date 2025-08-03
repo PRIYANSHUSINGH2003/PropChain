@@ -198,7 +198,7 @@ export default function DashboardPage() {
               body: JSON.stringify({ propertyDetails: property }),
             });
             const valData = await valRes.json();
-            const compRes = await fetch('http://localhost:4000/api/ai/compliance', {
+            const compRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/compliance`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ propertyDetails: property }),
@@ -534,7 +534,7 @@ function DownloadPortfolioReportButton({ userProperties, address }: { userProper
           body: JSON.stringify({ propertyDetails: property }),
         });
         const valData = await valRes.json();
-        const compRes = await fetch('http://localhost:4000/api/ai/compliance', {
+        const compRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/compliance`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ propertyDetails: property }),
@@ -600,7 +600,7 @@ function PropertyDetailsModal({ property, address, open, onClose }: { property: 
           body: JSON.stringify({ propertyDetails: property }),
         });
         const valData = await valRes.json();
-        const compRes = await fetch('http://localhost:4000/api/ai/compliance', {
+        const compRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/compliance`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ propertyDetails: property }),
@@ -781,7 +781,7 @@ function PortfolioWithAnalytics({ userProperties, address, openListModal }: { us
             body: JSON.stringify({ propertyDetails: property }),
           });
           const valData = await valRes.json();
-          const compRes = await fetch('http://localhost:4000/api/ai/compliance', {
+          const compRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/compliance`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ propertyDetails: property }),

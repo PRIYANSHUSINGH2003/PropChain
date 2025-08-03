@@ -23,7 +23,7 @@ export default function AIPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:4000/api/ai/valuation', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/valuation`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ propertyDetails: form }),
@@ -42,7 +42,7 @@ export default function AIPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:4000/api/ai/compliance', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/compliance`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ propertyDetails: form }),

@@ -11,7 +11,7 @@ export default function TokenizePage() {
   const handleSubmit = async (data: { name: string; description: string; value: number; owner: string }) => {
     setLoading(true);
     setResult(null);
-    const res = await fetch('http://localhost:4000/api/properties', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/properties`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data), // Use the actual form data including owner

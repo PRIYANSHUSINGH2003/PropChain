@@ -42,7 +42,7 @@ const TokenizationForm: React.FC<TokenizationFormProps> = ({ onSubmit, loading }
     setCompliance(null);
     try {
       // AI Valuation
-      const valRes = await fetch('http://localhost:4000/api/ai/valuation', {
+      const valRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/valuation`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ propertyDetails: { name, description, value } }),
@@ -51,7 +51,7 @@ const TokenizationForm: React.FC<TokenizationFormProps> = ({ onSubmit, loading }
       setValuation(valData.valuation);
       setRiskScore(valData.riskScore);
       // Compliance
-      const compRes = await fetch('http://localhost:4000/api/ai/compliance', {
+      const compRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/compliance`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description, value }),
