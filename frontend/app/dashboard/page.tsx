@@ -56,7 +56,7 @@ export default function DashboardPage() {
   const [transactions, setTransactions] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/properties')
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/properties`)
       .then(res => res.json())
       .then(data => setProperties(data));
     // Load transaction history from localStorage (simulate)
@@ -146,7 +146,7 @@ export default function DashboardPage() {
     if (!selectedProperty || !price || !share || !address) return;
     setLoading(true);
     setListResult(null);
-    const res = await fetch('http://localhost:4000/api/marketplace/listings', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/marketplace/listings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -162,7 +162,7 @@ export default function DashboardPage() {
       setListResult('Property listed for sale!');
       setShowModal(false);
       // Refresh properties to reflect new listing
-      fetch('http://localhost:4000/api/properties')
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/properties`)
         .then(res => res.json())
         .then(data => setProperties(data));
       // Add to transaction history (simulate)
@@ -192,8 +192,8 @@ export default function DashboardPage() {
         const result: any = {};
         try {
           await Promise.all(props.userProperties.map(async (property: any) => {
-            const valRes = await fetch('http://localhost:4000/api/ai/valuation', {
-              method: 'POST',
+            const valRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/valuation`, {
+            method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ propertyDetails: property }),
             });
@@ -528,7 +528,7 @@ function DownloadPortfolioReportButton({ userProperties, address }: { userProper
       // Fetch analytics for all properties
       const analytics: any = {};
       await Promise.all(userProperties.map(async (property) => {
-        const valRes = await fetch('http://localhost:4000/api/ai/valuation', {
+        const valRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/valuation`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ propertyDetails: property }),
@@ -594,7 +594,7 @@ function PropertyDetailsModal({ property, address, open, onClose }: { property: 
     async function fetchAI() {
       setAi({ loading: true });
       try {
-        const valRes = await fetch('http://localhost:4000/api/ai/valuation', {
+        const valRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/valuation`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ propertyDetails: property }),
@@ -657,7 +657,7 @@ function PropertyDetailsModal({ property, address, open, onClose }: { property: 
           <div className="font-semibold text-primary mb-1">List More Shares for Sale</div>
           <ListSharesForm property={property} address={address} onListed={(result, type) => {
             // Refresh properties after listing
-            fetch('http://localhost:4000/api/properties')
+            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/properties`)
               .then(res => res.json())
               .then(data => {
                 // Update properties and userProperties in parent
@@ -702,7 +702,7 @@ function ListSharesForm({ property, address, onListed }: { property: any, addres
     }
     setLoading(true);
     setResult(null);
-    const res = await fetch('http://localhost:4000/api/marketplace/listings', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/marketplace/listings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -775,7 +775,7 @@ function PortfolioWithAnalytics({ userProperties, address, openListModal }: { us
       const result: any = {};
       try {
         await Promise.all(userProperties.map(async (property) => {
-          const valRes = await fetch('http://localhost:4000/api/ai/valuation', {
+          const valRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/ai/valuation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ propertyDetails: property }),
